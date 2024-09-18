@@ -13,16 +13,16 @@ class RespostasServices {
         return resposta
     }
     
-    update() {}
+    // update() {}
 
     async delete(id) {
-        const questionarioExiste = await Questionarios.findByPk(id)
+        const respostaExiste = await Respostas.findByPk(id)
 
-        if(!questionarioExiste) {
+        if(!respostaExiste) {
             return false
         }
 
-        await questionarioExiste.destroy()
+        await respostaExiste.destroy()
 
         return true
     }

@@ -12,6 +12,7 @@ const schemaPostUsuario = yup.object({
         sobrenome: yup.string(),
         email: yup.string().email("E-mail informado não é valido").required("Email é obrigatório"),
         senha: yup.string().min(3, "Minimo de 3 caracteres").max(16, "Maximo de 16 caracteres").required("Senha é obrigatória"),
+        permissao: yup.string().oneOf(['criador', 'estudante']).required("Permissão é obrigatória"),
     }),
 })
 
