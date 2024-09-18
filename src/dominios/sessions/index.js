@@ -14,6 +14,29 @@ const schemaPostSession = yup.object({
     }),
 })
 
-sessionsRouter.post('/', validarSchema(schemaPostSession), sessionsControllers.create)
+sessionsRouter.post('/', validarSchema(schemaPostSession), sessionsControllers.create
+    /*
+       #swagger.tags = ['Sessions']
+       #swagger.description = 'Endpoint para logar em uma nova sessão'
+       #swagger.parameters['novaSessao'] = {
+           in: 'body',
+           description: 'Informações do nova sessaão',
+           required: true,
+           schema: {
+               $email: 'email@teste.com',
+               $senha: "1234",
+           }
+       }
+       #swagger.responses[200] = {
+           description: 'Sessão logada com sucesso'
+       }
+       #swagger.responses[400] = {
+           description: 'Email/Senha inválida'
+       }
+       #swagger.responses[500] = {
+           description: 'Não foi possível criar a sessão'
+       }
+   */
+)
 
 module.exports = sessionsRouter

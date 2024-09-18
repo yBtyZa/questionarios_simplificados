@@ -1,0 +1,412 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Questionarios Simplificados",
+    "description": "API para questionarios simplificados",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3333",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "bearerAuth": {
+      "type": "http",
+      "scheme": "bearer",
+      "bearerFormat": "JWT",
+      "description": "JWT Authorization header using the Bearer scheme. Example: 'Bearer {token}'"
+    }
+  },
+  "paths": {
+    "/usuarios/": {
+      "get": {
+        "tags": [
+          "Usuarios"
+        ],
+        "description": "Endpoint para listar os usuarios",
+        "responses": {
+          "200": {
+            "description": "Usuarios retornados com sucesso!"
+          },
+          "500": {
+            "description": "Não foi possível listar os usuarios"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Usuarios"
+        ],
+        "description": "Endpoint para criar um novo usuario",
+        "parameters": [
+          {
+            "name": "novoUsuario",
+            "in": "body",
+            "description": "Informações do novo usuario",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {
+                  "type": "string",
+                  "example": "Nome de teste"
+                },
+                "sobrenome": {
+                  "type": "string",
+                  "example": "Sobrenome de teste"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "XtGZi@example.com"
+                },
+                "senha": {
+                  "type": "string",
+                  "example": "12345678"
+                },
+                "permissao": {
+                  "type": "string",
+                  "example": "criador"
+                }
+              },
+              "required": [
+                "nome",
+                "sobrenome",
+                "email",
+                "senha",
+                "permissao"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Usuario criado com sucesso!"
+          },
+          "400": {
+            "description": "Usuário já possui cadastro"
+          },
+          "500": {
+            "description": "Não foi possível criar o usuario"
+          }
+        }
+      }
+    },
+    "/usuarios/{id}": {
+      "delete": {
+        "tags": [
+          "Usuarios"
+        ],
+        "description": "Endpoint para deletar um usuario",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do usuario a ser deletado",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "example": {
+                  "type": "string",
+                  "example": "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Usuario excluído com sucesso"
+          },
+          "400": {
+            "description": "Não foi possivel deletar o usuario"
+          },
+          "500": {
+            "description": "Não foi possível deletar o usuario"
+          }
+        }
+      }
+    },
+    "/questionarios/": {
+      "get": {
+        "tags": [
+          "Questionarios"
+        ],
+        "description": "Endpoint para listar os questionarios",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Questionarios retornados com sucesso!"
+          },
+          "500": {
+            "description": "Não foi possível listar os questionarios"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Questionarios"
+        ],
+        "description": "Endpoint para criar um novo questionário",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "novoQuestionario",
+            "in": "body",
+            "description": "Informações do novo questionário",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "titulo": {
+                  "type": "string",
+                  "example": "Questionario de teste"
+                },
+                "descricao": {
+                  "type": "string",
+                  "example": "Descricão de teste"
+                },
+                "perguntas": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "descricao": {
+                        "type": "string",
+                        "example": "Pergunta de teste 3"
+                      }
+                    },
+                    "required": [
+                      "descricao"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "titulo",
+                "descricao",
+                "perguntas"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Questionário criado com sucesso!"
+          },
+          "400": {
+            "description": "Não foi possível criar o questionário"
+          },
+          "500": {
+            "description": "Não foi possível criar o questionário"
+          }
+        }
+      }
+    },
+    "/questionarios/{id}": {
+      "delete": {
+        "tags": [
+          "Questionarios"
+        ],
+        "description": "Endpoint para deletar um questionario",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do questionario a ser deletado",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "example": {
+                  "type": "string",
+                  "example": "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d"
+                }
+              }
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Questionario excluído com sucesso"
+          },
+          "400": {
+            "description": "Não foi possivel deletar o questionario"
+          },
+          "500": {
+            "description": "Não foi possível deletar o questionario"
+          }
+        }
+      }
+    },
+    "/sessions/": {
+      "post": {
+        "tags": [
+          "Sessions"
+        ],
+        "description": "Endpoint para logar em uma nova sessão",
+        "parameters": [
+          {
+            "name": "novaSessao",
+            "in": "body",
+            "description": "Informações do nova sessaão",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "example": "email@teste.com"
+                },
+                "senha": {
+                  "type": "string",
+                  "example": "1234"
+                }
+              },
+              "required": [
+                "email",
+                "senha"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sessão logada com sucesso"
+          },
+          "400": {
+            "description": "Email/Senha inválida"
+          },
+          "500": {
+            "description": "Não foi possível criar a sessão"
+          }
+        }
+      }
+    },
+    "/respostas/{perguntaId}": {
+      "post": {
+        "tags": [
+          "Respostas"
+        ],
+        "description": "Endpoint para criar uma nova resposta no questionario",
+        "parameters": [
+          {
+            "name": "perguntaId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID da pergunta"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "novaResposta",
+            "in": "body",
+            "description": "Informações do nova resposta",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "conteudo": {
+                  "type": "string",
+                  "example": "Resposta 1"
+                }
+              },
+              "required": [
+                "conteudo"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Resposta criado com sucesso!"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Não foi possível criar a resposta"
+          }
+        }
+      }
+    },
+    "/respostas/{id}": {
+      "delete": {
+        "tags": [
+          "Respostas"
+        ],
+        "description": "Endpoint para deletar uma resposta",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID da resposta a ser deletado",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                },
+                "example": {
+                  "type": "string",
+                  "example": "9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d"
+                }
+              }
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Resposta excluída com sucesso"
+          },
+          "400": {
+            "description": "Não foi possivel deletar a resposta"
+          },
+          "500": {
+            "description": "Não foi possível deletar a resposta"
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ]
+}
