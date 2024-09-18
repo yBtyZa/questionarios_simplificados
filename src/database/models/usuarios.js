@@ -32,6 +32,9 @@ const Usuario = database.define('usuarios', {
       updatedAt: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW
+      },
+      permissao: {
+        type: Sequelize.STRING
       }
 })
 
