@@ -22,13 +22,12 @@ const schemaPostQuestionario = yup.object({
 const schemaDeleteQuestionario = yup.object({
     params: yup.object({
         id: yup.string().uuid("Id informado não é valido!").required("Id é obrigatório")
-        
     }),
 })
 
-questionariosRouter.use(garantirAutenticacaoRBAC('criador'))
-
 questionariosRouter.get('/', questionariosControllers.index)
+
+questionariosRouter.use(garantirAutenticacaoRBAC('criador'))
 
 questionariosRouter.post('/', validarSchema(schemaPostQuestionario), questionariosControllers.create)
 
